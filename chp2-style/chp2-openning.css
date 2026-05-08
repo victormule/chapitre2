@@ -1,0 +1,155 @@
+/* =============================================================================
+   travelling.css — Styles du travelling panoramique
+   Extrait de l'ancien <style> inline dans index.html.
+   Scopé autant que possible ; les règles "body.cartel-open" sont ici
+   car c'est le travelling qui gère le curseur et les éléments UI du dessus.
+   Les doublons avec styles.css (body.cartel-open { cursor: auto }) ont été
+   supprimés — styles.css fait autorité pour tout ce qui concerne le cartel.
+============================================================================= */
+
+/* Reset minimal */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: #000;
+  cursor: none;
+  font-family: 'Garamond', 'Georgia', serif;
+}
+
+/* ─── Scène ─── */
+#scene {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+}
+
+#shake {
+  position: absolute;
+  inset: 0;
+  will-change: transform;
+}
+
+/* ─── Image principale ─── */
+#img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: auto;
+  display: block;
+  filter: sepia(0.08) contrast(1.05);
+  pointer-events: none;
+  -webkit-user-drag: none;
+  will-change: transform;
+}
+
+/* ─── Overlays de crânes ─── */
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: auto;
+  display: block;
+  pointer-events: none;
+  -webkit-user-drag: none;
+  will-change: transform, opacity;
+  opacity: 0;
+  transition: opacity 0.45s ease;
+  z-index: 3;
+}
+.overlay.visible { opacity: 1; }
+
+/* ─── Légende ─── */
+#legend {
+  position: fixed;
+  bottom: 52px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 20;
+  text-align: center;
+  pointer-events: none;
+  color: rgba(255, 255, 255, 0.88);
+  white-space: nowrap;
+}
+#legend .num {
+  display: block;
+  font-size: clamp(22px, 3vw, 32px);
+  font-style: italic;
+  color: rgba(255, 255, 255, 0.5);
+  letter-spacing: 0.02em;
+  margin-bottom: 6px;
+  transition: opacity 0.6s ease, transform 0.6s ease;
+  opacity: 0;
+  transform: translateY(8px);
+}
+#legend .label {
+  display: block;
+  font-size: clamp(9px, 1.1vw, 11px);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  transition: opacity 0.6s ease, transform 0.6s ease;
+  opacity: 0;
+  transform: translateY(8px);
+}
+#legend.visible .num,
+#legend.visible .label {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ─── Barre de progression ─── */
+#bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  height: 2px;
+  width: 0%;
+  background: rgba(255, 255, 255, 0.35);
+  box-shadow: 0 0 6px rgba(255, 255, 255, 0.18);
+  pointer-events: none;
+  z-index: 30;
+}
+
+/* ─── Curseur custom ─── */
+#cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 40px;
+  height: 40px;
+  transform: translate(-50%, -50%) scale(1);
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0;
+  transition: opacity 0.4s ease, transform 0.25s ease;
+}
+#cursor.visible  { opacity: 1; }
+#cursor.clickable { transform: translate(-50%, -50%) scale(1.4); }
+
+/* ─── Fondu de navigation ─── */
+#fade {
+  position: fixed;
+  inset: 0;
+  background: #000;
+  z-index: 9998;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 1.4s ease-in;
+}
+#fade.out { opacity: 1; }
+
+/* ─── Masquage des éléments travelling quand le cartel est ouvert ─── */
+body.cartel-open #legend,
+body.cartel-open #bar {
+  opacity: 0 !important;
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+}

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Travelling</title>
+<link rel="stylesheet" href="./chp2-style/chp2-violence-et-trace.css">
+<link rel="stylesheet" href="./chp2-style/chp2-openning.css">
+</head>
+<body>
+
+<!-- ============================================================
+     TRAVELLING (toujours visible)
+     ============================================================ -->
+<div id="scene">
+  <div id="shake">
+    <img id="img" src="chp2-images/vue-general.png" alt="Vue" draggable="false">
+    <img class="overlay" id="ov-136" src="chp2-images/crane-136.png" alt="" draggable="false">
+    <img class="overlay" id="ov-137" src="chp2-images/crane-137.png" alt="" draggable="false">
+    <img class="overlay" id="ov-138" src="chp2-images/crane-138.png" alt="" draggable="false">
+  </div>
+</div>
+
+<div id="legend">
+  <span class="num"   id="leg-num"></span>
+  <span class="label" id="leg-label"></span>
+</div>
+
+<div id="bar"></div>
+<div id="fade"></div>
+
+<div id="cursor">
+  <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="20" cy="20" r="9"  stroke="rgba(255,255,255,0.55)" stroke-width="1"/>
+    <circle cx="20" cy="20" r="2"  fill="rgba(255,255,255,0.9)"/>
+    <line x1="20" y1="2"  x2="20" y2="10" stroke="rgba(255,255,255,0.28)" stroke-width="1"/>
+    <line x1="20" y1="30" x2="20" y2="38" stroke="rgba(255,255,255,0.28)" stroke-width="1"/>
+    <line x1="2"  y1="20" x2="10" y2="20" stroke="rgba(255,255,255,0.28)" stroke-width="1"/>
+    <line x1="30" y1="20" x2="38" y2="20" stroke="rgba(255,255,255,0.28)" stroke-width="1"/>
+  </svg>
+</div>
+
+<!-- ============================================================
+     CARTEL (overlay caché par défaut, monté par app.js au clic 136)
+     ============================================================ -->
+<div id="cartel-root" aria-hidden="true">
+  <main class="stage-frame">
+    <div class="display-stage" data-role="stage"></div>
+  </main>
+  <button class="close-btn" data-role="close-btn" aria-label="Fermer">
+    <svg viewBox="0 0 24 24">
+      <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+    </svg>
+  </button>
+  <div class="backdrop" data-role="backdrop" aria-hidden="true"></div>
+  <p class="close-hint" role="status" aria-live="polite">
+    Cliquer en dehors ou Échap pour refermer
+  </p>
+</div>
+
+<script src="../chp2-src/chp2-openning.js"></script>
+</body>
+</html>
